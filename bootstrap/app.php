@@ -13,6 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
 
+        // CORS - handle OPTIONS preflight before routing
+        $middleware->prepend(\Illuminate\Http\Middleware\HandleCors::class);
+
         // REGISTER MIDDLEWARE ROLE DISINI
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
